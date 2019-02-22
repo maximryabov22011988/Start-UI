@@ -1,0 +1,35 @@
+/*
+ * Default settings
+ */
+$option--vertical-indent: 16px;
+$option--horizontal-indent: 12px;
+
+$option-font-family: inherit;
+$option-font-size: 16px;
+$option-line-height: 1;
+
+$transition-time: 0.15s;
+$transition-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+
+
+/*
+ * 1. Colors
+ */
+
+/* 1.1 Option */
+$option-item-bg-color: rgba(#212121, 0.05);
+
+
+.options__item {
+  padding: $option--vertical-indent $option--horizontal-indent;
+  font-family: $option-font-family;
+  font-size: $option-font-size;
+  line-height: $option-line-height;
+  transition: background-color $transition-time $transition-function;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background-color: $option-item-bg-color;
+  }
+}

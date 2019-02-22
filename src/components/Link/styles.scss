@@ -1,0 +1,126 @@
+/*
+ * Default settings
+ */
+$padding-vertical: 12px; // Button-link
+$padding-horizontal: $padding-vertical * 3; // Button-link
+
+$font-family: inherit;
+$font-size: 16px;
+$line-height: 1;
+
+$border-radius: 3px; // Button-link
+
+$transition-time: 0.15s;
+$transition-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+
+
+/*
+ * 1. Colors
+ */
+
+/* 1.1 Tetx link */
+$link-color: #2962ff;
+$link-color--hover: rgba($link-color, 0.85);
+$link-color--active: rgba($link-color, 0.65);
+$link-color--visited: #8e24aa;
+$link-color--visited--hover: rgba($link-color--visited, 0.85);
+$link-color--visited--active: rgba($link-color--visited, 0.65);
+
+/* 1.2 Button-link */
+$text-color: rgba(#212121, 0.85);
+$bg-color: #fff;
+$border-color: rgba(#212121, 0.5);
+
+$text-color--hover: rgba(#212121, 1);
+$border-color--hover: rgba(#212121, 0.75);
+
+$text-color--disabled: rgba(#212121, 0.25);
+$bg-color--disabled: rgba(#212121, 0.025);
+$border-color--disabled: rgba(#212121, 0.1);
+
+$outline-custom-color: #2962ff;
+
+
+.link {
+  text-decoration: none;
+  color: $link-color;
+  transition: color $transition-time $transition-function, text-decoration $transition-time $transition-function;
+
+  &:hover {
+    text-decoration: underline;
+    color: $link-color--hover;
+  }
+
+  &:active,
+  &:focus {
+    text-decoration: none;
+    color: $link-color--active;
+    outline: 1px dotted rgba($link-color, 0.5);
+    outline-offset: 6px;
+  }
+
+  &:visited {
+    color: $link-color--visited;
+  }
+
+  &:visited:hover {
+    color: $link-color--visited--hover;
+  }
+
+  &:visited:active,
+  &:visited:focus {
+    text-decoration: none;
+    color: $link-color--visited--active;
+    outline: 1px dotted rgba($link-color--visited, 0.5);
+    outline-offset: 6px;
+  }
+}
+
+
+.btn {
+  box-sizing: border-box;
+  display: inline-block;
+  max-width: 100%;
+  margin: 0;
+  padding: $padding-vertical $padding-horizontal ($padding-vertical + 2);
+  vertical-align: middle;
+  font-family: $font-family;
+  font-size: $font-size;
+  line-height: $line-height;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: $text-color;
+  background-color: $bg-color;
+  background-image: none;
+  border-radius: $border-radius;
+  //border: none;
+  border: 1px solid $border-color;
+  transition: color $transition-time $transition-function, background-color $transition-time $transition-function, border-color $transition-time $transition-function;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover,
+  &:focus {
+    color: $text-color--hover;
+    border-color: $border-color--hover;
+  }
+
+  &:active,
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 2px rgba($outline-custom-color, 0.25);
+  }
+
+  &--disabled,
+  &--disabled:hover,
+  &--disabled:focus {
+    color: $text-color--disabled;
+    background-color: $bg-color--disabled;
+    border-color: $border-color--disabled;
+    cursor: not-allowed;
+  }
+}

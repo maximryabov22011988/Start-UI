@@ -1,0 +1,123 @@
+/*
+ * Default settings
+ */
+$range-height: 15px;
+$track-height: 1px;
+$thumb-indent: -7px;
+
+$border-radius: 10px;
+
+
+/*
+ * 1. Colors
+ */
+
+/* 1.1 Track */
+$track-bg-color: rgba(#212121, 0.25);
+
+/* 1.2 Thumb */
+$thumb-bg-color: rgba(#ffffff, 1);
+
+$outline-custom-color: #2962ff;
+
+
+.range {
+  display: flex;
+
+  &__input {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 50%;
+    height: $range-height;
+    padding: 0;
+    font-size: inherit;
+    background: none;
+    border: 0;
+    border-radius: $border-radius;
+    cursor: pointer;
+    appearance: none;
+
+    &:focus {
+      outline: 0;
+      box-shadow: 0 0 0 2px rgba($outline-custom-color, 0.25);
+    }
+
+    &:disabled,
+    &:disabled:hover,
+    &:disabled:focus {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &::-webkit-slider-runnable-track,
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+    }
+
+    @mixin range-track {
+      box-sizing: border-box;
+      width: 100%;
+      height: $track-height;
+      border-radius: $border-radius;
+      background: $track-bg-color;
+    }
+
+    &::-webkit-slider-runnable-track {
+      @include range-track;
+    }
+
+    &::-moz-range-track {
+      @include range-track;
+    }
+
+    &::-ms-track {
+      @include range-track;
+      color: transparent;
+    }
+
+    @mixin range-thumb {
+      box-sizing: border-box;
+      width: $range-height;
+      height: $range-height;
+      padding: 0;
+      background: $thumb-bg-color;
+      border-radius: 50%;
+      box-shadow: 0 2px 5px rgba(154, 153, 153, 0.5);
+      cursor: ew-resize;
+    }
+
+    &::-webkit-slider-thumb {
+      @include range-thumb;
+      margin-top: $thumb-indent;
+    }
+
+    &::-moz-range-thumb {
+      @include range-thumb;
+    }
+
+    &::-ms-thumb {
+      @include range-thumb;
+    }
+
+    &:disabled::-webkit-slider-thumb {
+      @include range-thumb;
+      margin-top: $thumb-indent;
+      cursor: not-allowed;
+    }
+
+    &:disabled::-moz-range-thumb {
+      @include range-thumb;
+      cursor: not-allowed;
+    }
+
+    &:disabled::-ms-thumb {
+      @include range-thumb;
+      cursor: not-allowed;
+    }
+
+    &::-ms-fill-lower,
+    &::-ms-tooltip {
+      display: none;
+    }
+  }
+}

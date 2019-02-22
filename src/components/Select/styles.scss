@@ -1,0 +1,61 @@
+/*
+ * 1. Colors
+ */
+$input-text-color--active: rgba(#212121, 1);
+$input-border-color--active: rgba(#212121, 0.75);
+
+$label-color--disabled: rgba(#212121, 0.5);
+$input-text-color--disabled: rgba(#212121, 0.5);
+$input-bg-color--disabled: #fff;
+$input-border-color--disabled: rgba(#212121, 0.25);
+
+
+.select {
+  position: relative;
+  user-select: none;
+
+  &:hover:not(.select--disabled):not(.select--open) {
+    .select__icon {
+      opacity: 1;
+    }
+  }
+
+  &--disabled {
+    .select__label {
+      color: $label-color--disabled;
+      cursor: not-allowed;
+    }
+
+    .select__panel,
+    .select__panel:hover,
+    .select__panel:focus {
+      color: $input-text-color--disabled;
+      background-color: $input-bg-color--disabled;
+      border-color: $input-border-color--disabled;
+      cursor: not-allowed;
+    }
+
+    .select__icon {
+      opacity: 0.25;
+      cursor: not-allowed;
+    }
+  }
+
+  &--open {
+    .select__panel {
+      color: $input-text-color--active;
+      border-color: $input-border-color--active;
+    }
+
+    .select__icon {
+      opacity: 0.4;
+      transform: rotate(180deg);
+    }
+
+    .select__list {
+      top: 52px;
+      z-index: 10;
+      opacity: 1;
+    }
+  }
+}

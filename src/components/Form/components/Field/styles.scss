@@ -1,0 +1,193 @@
+/*
+ * Default settings
+ */
+$label-padding-vertical: 3px;
+$label-padding-horizontal: $label-padding-vertical * 2;
+$label-font-size: 11px;
+$label-line-height: 1;
+
+$input-padding-vertical: 12px;
+$input-padding-horizontal: $input-padding-vertical * 1;
+$input-font-family: inherit;
+$input-font-size: 16px;
+$input-line-height: 1;
+
+$input-border-radius: 3px;
+
+$message-font-size: 12px;
+$message-line-height: 1.2;
+
+$transition-time: 0.15s;
+$transition-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+
+
+/*
+ * 1. Colors
+ */
+
+/* 1.1 Label */
+$label-color: rgba(#212121, 0.65);
+$label-bg-color: #fff;
+$label-color--disabled: rgba(#212121, 0.5);
+$label-color--error: rgba(#f44336, 0.75);
+
+/* 1.2 Input */
+$input-text-color: rgba(#212121, 0.85);
+$input-bg-color: #fff;
+$input-border-color: rgba(#212121, 0.5);
+
+$input-text-color--hover: rgba(#212121, 1);
+$input-bg-color--hover: #fff;
+$input-border-color--hover: rgba(#212121, 0.75);
+
+$input-text-color--focus: rgba(#212121, 1);
+$input-bg-color--focus: #fff;
+$input-border-color--focus: rgba(#212121, 1);
+
+$input-text-color--disabled: rgba(#212121, 0.5);
+$input-bg-color--disabled: #fff;
+$input-border-color--disabled: rgba(#212121, 0.25);
+
+$error-color: #f44336;
+
+$input-text-color--error: rgba($error-color, 0.85);
+$input-bg-color--error: #fff;
+$input-border-color--error: rgba($error-color, 0.5);
+
+$input-text-color--error--hover: rgba($error-color, 1);
+$input-bg-color--error--hover: #fff;
+$input-border-color--error--hover: rgba($error-color, 0.75);
+
+$input-text-color--error--focus: rgba($error-color, 1);
+$input-bg-color--error--focus: #fff;
+$input-border-color--error--focus: rgba($error-color, 1);
+
+$input-outline-custom-color: #2962ff;
+$input-outline-custom-color--error: rgba($error-color, 0.25);
+
+
+.field {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 10;
+    display: block;
+    width: 24px;
+    height: 24px;
+    background: url("images/icon-error.svg") no-repeat;
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity $transition-time $transition-function, transform $transition-time $transition-function;
+  }
+
+  &__label {
+    position: absolute;
+    top: -$label-padding-vertical * 3;
+    left: $input-padding-horizontal - $label-padding-horizontal + 2;
+    z-index: 10;
+    display: block;
+    padding: $label-padding-vertical $label-padding-horizontal ($label-padding-vertical + 2);
+    font-size: $label-font-size;
+    line-height: $label-line-height;
+    color: $label-color;
+    background-color: $label-bg-color;
+  }
+
+  &__input {
+    box-sizing: border-box;
+    display: inline-block;
+    max-width: 100%;
+    min-width: 280px;
+    width: 100%;
+    margin: 0;
+    padding: $input-padding-vertical $input-padding-horizontal ($input-padding-vertical + 2);
+    vertical-align: middle;
+    font-family: $input-font-family;
+    font-size: $input-font-size;
+    line-height: $input-line-height;
+    text-align: left;
+    text-transform: none;
+    color: $input-text-color;
+    background-color: $input-bg-color;
+    border-radius: $input-border-radius;
+    border: 1px solid $input-border-color;
+    box-shadow: none;
+    transition: color $transition-time $transition-function, background-color $transition-time $transition-function, border-color $transition-time $transition-function;
+    user-select: none;
+
+    &:hover {
+      color: $input-text-color--hover;
+      border-color: $input-border-color--hover;
+    }
+
+    &:focus {
+      color: $input-text-color--focus;
+      border-color: $input-border-color--focus;
+      outline: 0;
+      box-shadow: 0 0 0 2px rgba($input-outline-custom-color, 0.25);
+    }
+
+    &:disabled,
+    &:disabled:hover,
+    &:disabled:focus {
+      color: $input-text-color--disabled;
+      background-color: $input-bg-color--disabled;
+      border-color: $input-border-color--disabled;
+      cursor: not-allowed;
+    }
+  }
+
+  &__message {
+    display: block;
+    margin-top: $input-padding-vertical / 1.5;
+    font-size: $message-font-size;
+    line-height: $message-line-height;
+  }
+
+  &--disabled {
+    .field__label {
+      color: $label-color--disabled;
+    }
+  }
+
+  &--invalid {
+    &::before {
+      opacity: 0.75;
+      transform: scale(1);
+    }
+
+    &:hover::before {
+      opacity: 1;
+      transition: opacity $transition-time $transition-function;
+    }
+
+    .field__label {
+      color: $label-color--error;
+    }
+
+    .field__message {
+      color: $error-color;
+    }
+
+    .field__input {
+      color: $input-text-color--error;
+      border-color: $input-border-color--error;
+
+      &:hover {
+        color: $input-text-color--error--hover;
+        border-color: $input-border-color--error--hover;
+      }
+
+      &:focus {
+        color: $input-text-color--error--focus;
+        border-color: $input-border-color--error--focus;
+        outline: 0;
+        box-shadow: 0 0 0 2px $input-outline-custom-color--error;
+      }
+    }
+  }
+}

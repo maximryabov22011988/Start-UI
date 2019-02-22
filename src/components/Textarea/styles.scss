@@ -1,0 +1,195 @@
+/*
+ * Default settings
+ */
+$label-padding-vertical: 3px;
+$label-padding-horizontal: $label-padding-vertical * 2;
+$label-font-size: 11px;
+$label-line-height: 1;
+
+$textarea-padding-vertical: 12px;
+$textarea-padding-horizontal: 12px;
+$textarea-font-family: inherit;
+$textarea-font-size: 16px;
+$textarea-line-height: 1.4;
+
+$textarea-border-radius: 3px;
+
+$message-font-size: 12px;
+$message-line-height: 1.2;
+
+$transition-time: 0.15s;
+$transition-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+
+
+/*
+ * 1. Colors
+ */
+
+/* 1.1 Label */
+$label-color: rgba(#212121, 0.65);
+$label-bg-color: #fff;
+$label-color--disabled: rgba(#212121, 0.5);
+$label-color--error: rgba(#f44336, 0.75);
+
+/* 1.2 Textarea */
+$textarea-text-color: rgba(#212121, 0.85);
+$textarea-bg-color: #fff;
+$textarea-border-color: rgba(#212121, 0.5);
+
+$textarea-text-color--hover: rgba(#212121, 1);
+$textarea-bg-color--hover: #fff;
+$textarea-border-color--hover: rgba(#212121, 0.75);
+
+$textarea-text-color--focus: rgba(#212121, 1);
+$textarea-bg-color--focus: #fff;
+$textarea-border-color--focus: rgba(#212121, 1);
+
+$textarea-text-color--disabled: rgba(#212121, 0.5);
+$textarea-bg-color--disabled: #fff;
+$textarea-border-color--disabled: rgba(#212121, 0.25);
+
+$error-color: #f44336;
+
+$textarea-text-color--error: rgba($error-color, 0.85);
+$textarea-bg-color--error: #fff;
+$textarea-border-color--error: rgba($error-color, 0.5);
+
+$textarea-text-color--error--hover: rgba($error-color, 1);
+$textarea-bg-color--error--hover: #fff;
+$textarea-border-color--error--hover: rgba($error-color, 0.75);
+
+$textarea-text-color--error--focus: rgba($error-color, 1);
+$textarea-bg-color--error--focus: #fff;
+$textarea-border-color--error--focus: rgba($error-color, 1);
+
+$textarea-outline-custom-color: #2962ff;
+$textarea-outline-custom-color--error: rgba($error-color, 0.25);
+
+
+.field {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 10;
+    display: block;
+    width: 24px;
+    height: 24px;
+    background: url("images/icon-error.svg") no-repeat;
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity $transition-time $transition-function, transform $transition-time $transition-function;
+  }
+
+  &__label {
+    position: absolute;
+    top: -$label-padding-vertical * 3;
+    left: $textarea-padding-horizontal - $label-padding-horizontal + 2;
+    z-index: 10;
+    display: block;
+    padding: $label-padding-vertical $label-padding-horizontal ($label-padding-vertical + 2);
+    font-size: $label-font-size;
+    line-height: $label-line-height;
+    color: $label-color;
+    background-color: $label-bg-color;
+  }
+
+  &__textarea {
+    box-sizing: border-box;
+    display: inline-block;
+    min-width: 280px;
+    width: 100%;
+    min-height: 120px;
+    max-height: 320px;
+    resize: vertical;
+    margin: 0;
+    padding: $textarea-padding-vertical $textarea-padding-horizontal ($textarea-padding-vertical + 2);
+    vertical-align: middle;
+    font-family: $textarea-font-family;
+    font-size: $textarea-font-size;
+    line-height: $textarea-line-height;
+    text-align: left;
+    text-transform: none;
+    color: $textarea-text-color;
+    background-color: $textarea-bg-color;
+    border-radius: $textarea-border-radius;
+    border: 1px solid $textarea-border-color;
+    box-shadow: none;
+    transition: color $transition-time $transition-function, background-color $transition-time $transition-function, border-color $transition-time $transition-function;
+    user-select: none;
+
+    &:hover {
+      color: $textarea-text-color--hover;
+      border-color: $textarea-border-color--hover;
+    }
+
+    &:focus {
+      color: $textarea-text-color--focus;
+      border-color: $textarea-border-color--focus;
+      outline: 0;
+      box-shadow: 0 0 0 2px rgba($textarea-outline-custom-color, 0.25);
+    }
+
+    &:disabled,
+    &:disabled:hover,
+    &:disabled:focus {
+      color: $textarea-text-color--disabled;
+      background-color: $textarea-bg-color--disabled;
+      border-color: $textarea-border-color--disabled;
+      cursor: not-allowed;
+    }
+  }
+
+  &__message {
+    display: block;
+    margin-top: $textarea-padding-vertical / 1.5;
+    font-size: $message-font-size;
+    line-height: $message-line-height;
+  }
+
+  &--disabled {
+    .field__label {
+      color: $label-color--disabled;
+    }
+  }
+
+  &--invalid {
+    &::before {
+      opacity: 0.75;
+      transform: scale(1);
+    }
+
+    &:hover::before {
+      opacity: 1;
+      transition: opacity $transition-time $transition-function;
+    }
+
+    .field__label {
+      color: $label-color--error;
+    }
+
+    .field__message {
+      color: $error-color;
+    }
+
+    .field__textarea {
+      color: $textarea-text-color--error;
+      border-color: $textarea-border-color--error;
+
+      &:hover {
+        color: $textarea-text-color--error--hover;
+        border-color: $textarea-border-color--error--hover;
+      }
+
+      &:focus {
+        color: $textarea-text-color--error--focus;
+        border-color: $textarea-border-color--error--focus;
+        outline: 0;
+        box-shadow: 0 0 0 2px $textarea-outline-custom-color--error;
+      }
+    }
+  }
+}

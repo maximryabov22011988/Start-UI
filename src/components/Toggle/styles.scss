@@ -1,0 +1,131 @@
+/*
+ * Default settings
+ */
+
+$toggle--vertical-indent: 14px;
+$toggle--horizontal-indent: 0;
+
+$icon-indent: 6px;
+$text-indent: 42px;
+
+$label-font-family: inherit;
+$label-font-size: 16px;
+$label-line-height: 1.1;
+
+$transition-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+
+
+/*
+ * 1. Colors
+ */
+
+/* 1.1 Toggle */
+$toggle-bg-color: rgba(#212121, 0.25);
+$toggle-bg-color--active: rgba(#2962ff, 0.6);
+$toggle-bg-color--disabled: rgba(#212121, 0.15);
+
+$toggle-color: rgba(#ffffff, 1);
+$toggle-color--active: rgba(#2962ff, 1);
+$toggle-color--disabled: rgba(#212121, 0.5);
+
+/* 1.2 Label */
+$label-text-color: rgba(#212121, 0.85);
+$label-text-color--active: rgba(#212121, 1);
+$label-text-color--disabled: rgba(#212121, 0.25);
+
+$outline-custom-color: #2962ff;
+
+
+.toggle {
+  cursor: pointer;
+  user-select: none;
+
+  &:not(:last-child) {
+    margin-bottom: $toggle--vertical-indent;
+    margin-right: $toggle--horizontal-indent;
+  }
+
+  .toggle__default-checkbox {
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px);
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    overflow: hidden;
+  }
+
+  &__label {
+    cursor: pointer;
+  }
+
+  &__label-text {
+    position: relative;
+    display: block;
+    padding-left: $text-indent;
+    font-size: $label-font-size;
+    line-height: $label-line-height;
+    color: $label-text-color;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 0;
+      z-index: 5;
+      display: block;
+      width: 34px;
+      height: 14px;
+      background: $toggle-bg-color;
+      border-radius: 8px;
+      transition: background 0.2s $transition-function;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -1px;
+      z-index: 10;
+      width: 20px;
+      height: 20px;
+      display: block;
+      background: $toggle-color;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(154, 153, 153, 0.5);
+      transition: all 0.2s $transition-function;
+    }
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+
+    .toggle__label {
+      cursor: not-allowed;
+    }
+
+    .toggle__label-text {
+      color: $label-text-color--disabled;
+    }
+
+    .toggle__label-text::before {
+      background-color: $toggle-bg-color--disabled;
+    }
+  }
+}
+
+.toggle__default-checkbox:checked + .toggle__label-text::before {
+  background-color: $toggle-bg-color--active;
+}
+
+.toggle__default-checkbox:checked + .toggle__label-text::after {
+  transform: translateX(15px);
+  background-color: $toggle-color--active;
+  box-shadow: 0 3px 8px rgba(79, 46, 220, 0.2);
+  transition: all 0.2s $transition-function, background 0.1s $transition-function;
+}
+
+.toggle__default-checkbox:checked:focus + .toggle__label-text::after,
+.toggle__default-checkbox:focus + .toggle__label-text::after {
+  box-shadow: 0 0 0 2px rgba($outline-custom-color, 0.25);
+}

@@ -1,0 +1,189 @@
+/*
+ * Default settings
+ */
+
+$radio--vertical-indent: 0;
+$radio--horizontal-indent: 14px;
+
+$icon-indent: 6px;
+
+$label-font-family: inherit;
+$label-font-size: 16px;
+$label-line-height: 1.1;
+
+$help-text--vertical-indent: 3px;
+$help-text--horizontal-indent: 26px;
+$help-text-font-size: 12px;
+$help-text-line-height: 1.1;
+
+$transition-time: 0.15s;
+$transition-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+
+
+/*
+ * 1. Colors
+ */
+
+/* 1.1 Custom radio */
+$custom-radio-color: rgba(#212121, 0.5);
+$custom-radio-color--hover: rgba(#212121, 0.85);
+$custom-radio-color--disabled: rgba(#212121, 0.5);
+
+/* 1.2 Label */
+$label-text-color: rgba(#212121, 0.85);
+$label-text-color--hover: rgba(#212121, 1);
+$label-text-color--disabled: rgba(#212121, 0.5);
+
+/* 1.3 Help text */
+$help-text-color: rgba(#212121, 0.5);
+$help-text-color--disabled: rgba(#212121, 0.5);
+
+$outline-custom-color: #2962ff;
+
+
+.radio {
+  cursor: pointer;
+  user-select: none;
+
+  &:not(:last-child) {
+    margin-bottom: $radio--vertical-indent;
+    margin-right: $radio--horizontal-indent;
+  }
+
+  .radio__default-radio {
+    margin-right: 8px;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba($outline-custom-color, 0.25);
+    }
+  }
+
+  &__label {
+    position: relative;
+    display: flex;
+    cursor: pointer;
+  }
+
+  &__label-text {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    display: block;
+    font-size: $label-font-size;
+    line-height: $label-line-height;
+    color: $label-text-color;
+    transition: color $transition-time $transition-function;
+  }
+
+  &__help-text {
+    display: block;
+    margin-top: $help-text--vertical-indent;
+    margin-left: $help-text--horizontal-indent;
+    font-size: $help-text-font-size;
+    line-height: $help-text-line-height;
+    color: $help-text-color;
+    user-select: none;
+  }
+
+  &--custom {
+    .radio__default-radio {
+      position: absolute !important;
+      clip: rect(1px, 1px, 1px, 1px);
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      border: 0 !important;
+      overflow: hidden;
+    }
+
+    .radio__custom-radio {
+      position: relative;
+      width: 20px;
+      height: 20px;
+      margin-right: $icon-indent;
+      border: 0 solid $custom-radio-color;
+      border-radius: 50%;
+      transition: all 0.2s $transition-function;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: $custom-radio-color;
+        transition: all 0.2s $transition-function;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 5;
+        width: 5px;
+        height: 5px;
+        background-color: transparent;
+        border: 0 solid $custom-radio-color;
+        border-radius: 50%;
+        transition: all 0.2s $transition-function;
+      }
+    }
+
+    .radio__default-radio:checked + .radio__custom-radio::before {
+      width: 10px;
+      height: 10px;
+      background-color: $custom-radio-color--hover;
+    }
+
+    .radio__default-radio:checked + .radio__custom-radio::after {
+      width: 16px;
+      height: 16px;
+      border: 2px solid $custom-radio-color--hover;
+    }
+
+    .radio__default-radio:checked:focus + .radio__custom-radio::after {
+      box-shadow: 0 0 0 2px rgba($outline-custom-color, 0.25);
+    }
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+
+    .radio__default-radio {
+      cursor: not-allowed;
+    }
+
+    .radio__default-radio:checked + .radio__custom-radio::before {
+      background-color: $custom-radio-color--disabled;
+    }
+
+    .radio__default-radio:checked + .radio__custom-radio::after {
+      border: 2px solid $custom-radio-color--disabled;
+    }
+
+    .radio__label {
+      cursor: not-allowed;
+    }
+
+    .radio__label-text {
+      color: $label-text-color--disabled;
+    }
+  }
+}
+
+.radio:not(.radio--disabled):hover {
+  .radio__custom-radio::before {
+    background-color: $custom-radio-color--hover;
+  }
+
+  .radio__label-text {
+    color: $label-text-color--hover;
+  }
+}
